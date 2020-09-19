@@ -1,0 +1,5 @@
+-- image
+docker pull mattrayner/lamp
+
+-- run
+docker run -r -p "80:80" -v ${PWD}/src/www:/app mattrayner/lamp:latest
