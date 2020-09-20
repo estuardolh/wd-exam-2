@@ -29,16 +29,22 @@ if($_POST['accion'] === 'agregar'){
     ."', str_to_date('".$_POST['fecha_anulado']."', '%Y-%m-%d'));";
   mysqli_query( $conexion, $insert);
 
-  header('Location: /');
+  header('Location: /bancos.php');
 }else if($_POST['accion'] === 'eliminar'){
   $delete = "DELETE FROM BANCOS WHERE codigo_cuenta_bancaria = '".$_POST['codigo_cuenta_bancaria']."';";
   mysqli_query( $conexion, $delete);
 
-  header('Location: /');
+  header('Location: /bancos.php');
 
 }
 
-echo "<h1>Listado de Bancos</h1>";
+echo "<html>";
+echo "<head>";
+echo "<title>Estados</title>";
+echo "<link rel=\"stylesheet\" href=\"estilo.css\" type=\"text/css\">";
+echo "</head>";
+echo "<body>";
+echo "<h1>Listado de bancos</h1>";
 echo "<table border='1'>";
 echo "<tr>";
 echo "<th>Codigo empresa</th>";
@@ -52,13 +58,13 @@ echo "</tr>";
 while ($columna = mysqli_fetch_array( $resultado ))
 {
   echo "<tr>";
-  echo "<td>" . $columna['codigo_empresa'] . "</td><td>" . $columna['codigo_cuenta_bancaria'] . "</td>"."<td>" . $columna['nombre_cuenta_bancaria'] . "</td>"."<td>" . $columna['anulado'] . "</td>"."<td>" . $columna['fecha_anulado'] . "</td>"."<td><form method=\"POST\"><input name=\"accion\" type=\"hidden\" value=\"eliminar\"><input type=\"hidden\" name=\"codigo_cuenta_bancaria\" value=\"" . $columna['codigo_cuenta_bancaria'] . "\"><input type=\"submit\" value=\"Eliminar\"></form></td>";
+  echo "<td>" . $columna['codigo_empresa'] . "</td><td>" . $columna['codigo_cuenta_bancaria'] . "</td>"."<td>" . $columna['nombre_cuenta_bancaria'] . "</td>"."<td>" . $columna['anulado'] . "</td>"."<td>" . $columna['fecha_anulado'] . "</td>"."<td><form method=\"POST\" action=\"bancos.php\"><input name=\"accion\" type=\"hidden\" value=\"eliminar\"><input type=\"hidden\" name=\"codigo_cuenta_bancaria\" value=\"" . $columna['codigo_cuenta_bancaria'] . "\"><input type=\"submit\" value=\"Eliminar\"></form></td>";
   echo "</tr>";
 }
 echo "</table>";
 
 echo "<h1>Agregar Bancos</h1>";
-echo "<form method=\"POST\">";
+echo "<form method=\"POST\" action=\"bancos.php\">";
 echo "<table>";
 
 echo "<tr>";
@@ -121,7 +127,8 @@ echo "</td>";
 echo "</tr>";
 
 echo "</table>";
-
+echo "</body>";
+echo "</html>";
 
 mysqli_close( $conexion );
 ?>

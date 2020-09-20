@@ -1,0 +1,23 @@
+table {
+  background-color: lightgray;
+}
+
+h1 {
+  color: black;
+}
+
+td {
+  border: 0px;
+}
+
+body {
+  background-color: white;
+}
+
+select {
+  border-color: green;
+}
+
+input {
+  border-color: black;
+}
